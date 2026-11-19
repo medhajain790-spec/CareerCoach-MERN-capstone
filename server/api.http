@@ -1,0 +1,67 @@
+@base = http://localhost:5000/api
+
+### 1. Register
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{ "name": "Test User", "email": "test1@example.com", "password": "123456" }
+
+### 2. Login (token apne aap save hota hai)
+# @name login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "email": "test1@example.com", "password": "123456" }
+
+### Tokens ko variables mein rakho
+@token = {{login.response.body.accessToken}}
+@refresh = {{login.response.body.refreshToken}}
+
+### 3. Refresh token
+POST {{base}}/auth/refresh
+Content-Type: application/json
+
+{ "refreshToken": "{{refresh}}" }
+
+### 4. Save profile
+PUT {{base}}/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{ "education": "B.Tech CSE", "skills": "python, sql, javascript", "experience": "2 web projects" }
+
+### 5. Get profile
+GET {{base}}/profile
+Authorization: Bearer {{token}}
+
+### 6. Generate resume
+POST {{base}}/generate/resume
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+
+### 7. Generate interview questions
+POST {{base}}/generate/interview
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{ "role": "Data Analyst" }
+
+### 8. History
+GET {{base}}/generate/history
+Authorization: Bearer {{token}}
+
+### 9. Admin usage (normal user se 403 aayega, admin token se data)
+GET {{base}}/admin/usage
+Authorization: Bearer {{token}}
+
+### 10. Validation error test (education khaali)
+PUT {{base}}/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{ "education": "", "skills": "python" }
+
+### 11. Bina token ke protected route (401 aana chahiye)
+GET {{base}}/profile

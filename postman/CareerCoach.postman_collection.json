@@ -1,0 +1,11 @@
+{"info":{"name":"CareerCoach","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+"variable":[{"key":"base","value":"http://localhost:5000/api"},{"key":"token","value":""},{"key":"refresh","value":""}],
+"item":[
+{"name":"Register","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{base}}/auth/register","body":{"mode":"raw","raw":"{\"name\":\"Test\",\"email\":\"t@t.com\",\"password\":\"123456\"}"}}},
+{"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{base}}/auth/login","body":{"mode":"raw","raw":"{\"email\":\"t@t.com\",\"password\":\"123456\"}"}}},
+{"name":"Refresh","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":"{{base}}/auth/refresh","body":{"mode":"raw","raw":"{\"refreshToken\":\"{{refresh}}\"}"}}},
+{"name":"Save Profile","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"},{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{base}}/profile","body":{"mode":"raw","raw":"{\"education\":\"B.Tech CSE\",\"skills\":\"React, Node, MongoDB\",\"experience\":\"1 internship\"}"}}},
+{"name":"Generate Resume","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"},{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{base}}/generate/resume","body":{"mode":"raw","raw":"{}"}}},
+{"name":"Generate Interview","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"},{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{base}}/generate/interview","body":{"mode":"raw","raw":"{\"role\":\"MERN Developer\"}"}}},
+{"name":"History","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{base}}/generate/history"}},
+{"name":"Admin Usage","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{base}}/admin/usage"}}]}

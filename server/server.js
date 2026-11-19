@@ -1,0 +1,14 @@
+require('dotenv').config();
+const express = require('express'), cors = require('cors');
+const connectDB = require('./config/db');
+const errorHandler = require('./middleware/error');
+const app = express();
+app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(express.json());
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/profile', require('./routes/profile'));
+app.use('/api/generate', require('./routes/generate'));
+app.use('/api/admin', require('./routes/admin'));
+app.use((req, res, next) => { res.status(404); next(new Error('Route not found')); });
+app.use(errorHandler);
+connectDB().then(() => app.listen(process.env.PORT || 5000, () => console.log('Server running')));
