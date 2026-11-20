@@ -3,7 +3,7 @@ const express = require('express'), cors = require('cors');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 const app = express();
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' }));
 app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/profile', require('./routes/profile'));
