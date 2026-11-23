@@ -3,3 +3,4 @@ Server: `cd server && cp .env.example .env` (fill MONGO_URI, secrets, ANTHROPIC_
 Client: `cd client && npm i && npm run dev` → http://localhost:5173
 Register with role "admin" to see the Admin usage report. Import `postman/CareerCoach.postman_collection.json` for API testing.
 # CareerCoach-MERN-capstone
+Live demo: https://careercoach-mern-capstone.onrender.com
